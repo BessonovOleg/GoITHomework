@@ -3,13 +3,7 @@
  */
 public class ArrayMinMaxFind {
 
-    private int[] array;
-
-    public ArrayMinMaxFind(int[] ar ){
-        this.array = ar;
-    }
-
-    public int getMaxValue(){
+    public static int getMaxValue(int[] array){
         int tmpVar = array[0];
 
         for(int var:array){
@@ -22,7 +16,7 @@ public class ArrayMinMaxFind {
     }
 
 
-    public int getMinValue(){
+    public static int getMinValue(int[] array){
         int tmpVar = array[0];
 
         for(int var:array){
@@ -34,5 +28,24 @@ public class ArrayMinMaxFind {
         return tmpVar;
     }
 
+    public static void sortArray(int[] array){
+        int tmpVar;
+        boolean isChange = true;
+
+        while (isChange){
+            isChange = false;
+
+            for(int counter = 0;counter<array.length-1;counter++){
+                if (array[counter]>array[counter+1]){
+                    tmpVar = array[counter+1];
+                    array[counter+1] = array[counter];
+                    array[counter] = tmpVar;
+                    isChange = true;
+                }
+            }
+
+        }
+
+    }
 
 }
