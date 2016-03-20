@@ -2,6 +2,20 @@ import java.util.List;
 
 public class HomeWorkEE2 {
 
+
+    public HomeWorkEE2() {
+        TaskImplIntegerAdd task1 = new TaskImplIntegerAdd(10);
+        TaskImplIntegerAdd task2 = new TaskImplIntegerAdd(20);
+        TaskImplIntegerAdd task3 = new TaskImplIntegerAdd(30);
+        TaskImplIntegerSub task4 = new TaskImplIntegerSub(50);
+        TaskImplIntegerSub task5 = new TaskImplIntegerSub(60);
+        TaskImpLongAdd task6 = new TaskImpLongAdd(100L);
+        TaskImpLongAdd task7 = new TaskImpLongAdd(200L);
+        TaskImpLongAdd task8 = new TaskImpLongAdd(300L);
+
+
+    }
+
     //1 Переписать интерфейс Task так что бы он был типизирован по результату (значению возращаемуому методом getResult()).
     public interface Task<T> {
         // Метода запускает таск на выполнение
@@ -22,34 +36,129 @@ public class HomeWorkEE2 {
     public interface Executor<T> {
         // Добавить таск на выполнение. Результат таска будет доступен через метод getValidResults().
         // Бросает Эксепшн если уже был вызван метод execute()
-        void addTask(Task<? extends T> task);
+        void addTask(Task<? extends T> task) throws ExecuteWasException;
 
         // Добавить таск на выполнение и валидатор результата. Результат таска будет записан в ValidResults если validator.isValid вернет true для этого результата
         // Результат таска будет записан в InvalidResults если validator.isValid вернет false для этого результата
         // Бросает Эксепшн если уже был вызван метод execute()
-        void addTask(Task<? extends T> task, Validator<? super T> validator);
+        void addTask(Task<? extends T> task, Validator<? super T> validator) throws ExecuteWasException;
 
         // Выполнить все добавленые таски
         void execute();
 
         // Получить валидные результаты. Бросает Эксепшн если не был вызван метод execute()
-        List getValidResults();
+        List getValidResults() throws ExecuteNotWasException;
 
         // Получить невалидные результаты. Бросает Эксепшн если не был вызван метод execute()
-        List getInvalidResults();
+        List getInvalidResults() throws ExecuteNotWasException;
 
     }
 
 
+    public class TaskImplIntegerAdd implements Task<Number> {
+      private Integer num;
+
+        public TaskImplIntegerAdd(Number num) {
+            this.num = num.intValue();
+        }
+
+        @Override
+        public void execute() {
+            num += num;
+        }
+
+        @Override
+        public Number getResult() {
+            return num;
+        }
+    }
+
+    public class TaskImplIntegerSub implements Task<Number> {
+        private Integer num;
+
+        public TaskImplIntegerSub(Number num) {
+            this.num = num.intValue();
+        }
+
+        @Override
+        public void execute() {
+            num -= num;
+        }
+
+        @Override
+        public Number getResult() {
+            return num;
+        }
+    }
+
+    public class TaskImpLongAdd implements Task<Number> {
+        private Long num;
+
+        public TaskImpLongAdd(Long num) {
+            this.num = num;
+        }
+
+        @Override
+        public void execute() {
+            num += num;
+        }
+
+        @Override
+        public Number getResult() {
+            return num;
+        }
+    }
 
 
+    public class ValidatorNum implements Validator<Number> {
+        @Override
+        public boolean isValid(Number result) {
+            if (result.longValue() > 10) {
+                return true;
+            }
+            return false;
+        }
+    }
+
+
+
+    public class ExecutorImpl implements Executor<Number> {
+
+        private boolean isExecuteWas = false;
+
+        @Override
+        public void addTask(Task<? extends Number> task) {
+
+        }
+
+        @Override
+        public void addTask(Task<? extends Number> task, Validator<? super Number> validator) {
+
+        }
+
+        @Override
+        public void execute() throws ExecuteWasException{
+            if (isExecuteWas) {
+                throw new ExecuteWasException();
+            }
+        }
+
+        @Override
+        public List getValidResults() {
+            return null;
+        }
+
+        @Override
+        public List getInvalidResults() {
+            return null;
+        }
+    }
 
 
 
     public static void main(String[] args) {
 
     }
-
 
 
 
