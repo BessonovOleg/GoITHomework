@@ -1,0 +1,7 @@
+Test for 100000 elements. Time in milliseconds
+----------------------------------------------------------------------------------
+            add   get   remove   contains  populate  iterator.add  iterator.remove
+ArrayList   15633     0    0         2          9         0           4
+LinkedList  14287     0    0         6          40         0           7
+HashSet     0     0    0         4          48         
+TreeSet     0     0    0         5          47         

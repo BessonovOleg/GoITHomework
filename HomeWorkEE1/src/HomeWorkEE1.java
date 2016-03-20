@@ -9,12 +9,14 @@ public class HomeWorkEE1 {
     private long startTime;
     private long endTime;
     private int randomIndex;
+    private int countTestStep;
 
     public void init() {
         random = new Random();
         startTime = 0;
         endTime   = 0;
         randomIndex = 0;
+        countTestStep = 100;
     }
 
     public static void main(String[] args) {
@@ -32,53 +34,30 @@ public class HomeWorkEE1 {
         long[][] results = new long[4][7];
 
         results[0][0] = arrayAddIndexTime(lengthForTest,1);
-            System.out.println("1");
         results[0][1] = arrayGetIndexTime(lengthForTest);
-            System.out.println("2");
         results[0][2] = arrayRemoveIndexTime(lengthForTest);
-            System.out.println("3");
         results[0][3] = arrayContainsTime(lengthForTest);
-            System.out.println("4");
         results[0][4] = arrayPopulateTime(lengthForTest);
-            System.out.println("5");
         results[0][5] = arrayIteratorAddTime(lengthForTest);
-            System.out.println("6");
         results[0][6] = arrayIteratorRemoveTime(lengthForTest);
-            System.out.println("7");
         results[1][0] = linkedListAddIndexTime(lengthForTest,1);
-            System.out.println("8");
         results[1][1] = linkedListGetIndexTime(lengthForTest);
-            System.out.println("9");
         results[1][2] = linkedListRemoveIndexTime(lengthForTest);
-            System.out.println("10");
         results[1][3] = linkedListContainsTime(lengthForTest);
-            System.out.println("11");
         results[1][4] = linkedListPopulateTime(lengthForTest);
-            System.out.println("12");
         results[1][5] = linkedListIteratorAddTime(lengthForTest);
-            System.out.println("13");
         results[1][6] = linkedListIteratorRemoveTime(lengthForTest);
-            System.out.println("14");
         results[2][0] = hashSetAddTime(lengthForTest);
-            System.out.println("15");
         results[2][1] = hashSetGetTime(lengthForTest);
-            System.out.println("16");
         results[2][2] = hashSetRemoveTime(lengthForTest);
-            System.out.println("17");
         results[2][3] = hashSetContainsTime(lengthForTest);
-            System.out.println("18");
         results[2][4] = hashSetPopulateTime(lengthForTest);
-            System.out.println("19");
         results[3][0] = treeSetAddTime(lengthForTest);
-            System.out.println("20");
         results[3][1] = treeSetGetTime(lengthForTest);
-            System.out.println("21");
         results[3][2] = treeSetRemoveTime(lengthForTest);
-            System.out.println("22");
         results[3][3] = treeSetContainsTime(lengthForTest);
-            System.out.println("23");
         results[3][4] = treeSetPopulateTime(lengthForTest);
-            System.out.println("24");
+
 
         resultText.append("Test for " + lengthForTest + " elements. Time in milliseconds");
         resultText.append('\n');
@@ -128,11 +107,11 @@ public class HomeWorkEE1 {
     // 2 - вставка в последний индекс
     public long arrayAddIndexTime(int length, int modeTest) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
         List arrayList = new ArrayList();
 
         if (modeTest == 0) {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < countTestStep; i++) {
                 arrayList = new ArrayList();
 
                 startTime = System.currentTimeMillis();
@@ -145,7 +124,7 @@ public class HomeWorkEE1 {
         }
 
         if (modeTest == 1) {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < countTestStep; i++) {
                 arrayList = new ArrayList();
 
                 startTime = System.currentTimeMillis();
@@ -166,7 +145,7 @@ public class HomeWorkEE1 {
         }
 
         if (modeTest == 2) {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < countTestStep; i++) {
                 arrayList = new ArrayList();
 
                 startTime = System.currentTimeMillis();
@@ -188,7 +167,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-            result = result / 100;
+            result = result / countTestStep;
         }
 
         return result;
@@ -196,14 +175,14 @@ public class HomeWorkEE1 {
 
     public long arrayGetIndexTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
 
         List arrayList = new ArrayList();
         for(int i = 0; i < length; i++) {
             arrayList.add(i);
         }
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             randomIndex = random.nextInt(length);
 
             startTime = System.currentTimeMillis();
@@ -218,7 +197,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-            result = result / 100;
+            result = result / countTestStep;
         }
 
         return result;
@@ -227,14 +206,14 @@ public class HomeWorkEE1 {
 
     public long arrayRemoveIndexTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
 
         List arrayList = new ArrayList();
         for(int i = 0; i < length; i++) {
             arrayList.add(i);
         }
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             randomIndex = random.nextInt(length);
             startTime = System.currentTimeMillis();
             if(randomIndex < arrayList.size()) {
@@ -249,7 +228,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-            result = result / 100;
+            result = result / countTestStep;
         }
 
         return result;
@@ -258,14 +237,14 @@ public class HomeWorkEE1 {
 
     public long arrayContainsTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
         int randomValue;
         List arrayList = new ArrayList();
         for(int i = 0; i < length; i++) {
             arrayList.add(i);
         }
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             randomValue = random.nextInt(length);
             Iterator iterator = arrayList.iterator();
 
@@ -285,7 +264,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-            result = result / 100;
+            result = result / countTestStep;
         }
 
         return result;
@@ -293,10 +272,10 @@ public class HomeWorkEE1 {
 
     public long arrayPopulateTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
         List arrayList;
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             arrayList = new ArrayList();
             startTime = System.currentTimeMillis();
             for(int j = 0; j < length; j++) {
@@ -311,7 +290,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-           result = result / 100;
+           result = result / countTestStep;
         }
 
         return result;
@@ -319,11 +298,11 @@ public class HomeWorkEE1 {
 
     public long arrayIteratorAddTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
         List arrayList;
         ListIterator iterator;
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             arrayList = new ArrayList();
 
             for(int j = 0; j < length; j++) {
@@ -343,7 +322,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-            result = result / 100;
+            result = result / countTestStep;
         }
 
         return result;
@@ -352,12 +331,12 @@ public class HomeWorkEE1 {
 
     public long arrayIteratorRemoveTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
         List arrayList;
         Iterator iterator;
 
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             arrayList = new ArrayList();
             for(int j = 0; j < length; j++) {
                 arrayList.add(j);
@@ -382,7 +361,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-           result = result / 100;
+           result = result / countTestStep;
         }
 
         return result;
@@ -394,11 +373,11 @@ public class HomeWorkEE1 {
 
     public long linkedListAddIndexTime(int length, int modeTest) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
         List linkedList = new LinkedList();
 
         if (modeTest == 0) {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < countTestStep; i++) {
                 linkedList = new ArrayList();
 
                 startTime = System.currentTimeMillis();
@@ -411,7 +390,7 @@ public class HomeWorkEE1 {
         }
 
         if (modeTest == 1) {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < countTestStep; i++) {
                 linkedList = new ArrayList();
 
                 startTime = System.currentTimeMillis();
@@ -432,7 +411,7 @@ public class HomeWorkEE1 {
         }
 
         if (modeTest == 2) {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < countTestStep; i++) {
                 linkedList = new ArrayList();
 
                 startTime = System.currentTimeMillis();
@@ -454,7 +433,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-            result = result / 100;
+            result = result / countTestStep;
         }
 
         return result;
@@ -462,14 +441,14 @@ public class HomeWorkEE1 {
 
     public long linkedListGetIndexTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
 
         List linkedList = new LinkedList();
         for(int i = 0; i < length; i++) {
             linkedList.add(i);
         }
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             randomIndex = random.nextInt(length);
 
             startTime = System.currentTimeMillis();
@@ -484,7 +463,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-            result = result / 100;
+            result = result / countTestStep;
         }
 
         return result;
@@ -493,14 +472,14 @@ public class HomeWorkEE1 {
 
     public long linkedListRemoveIndexTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
 
         List linkedList = new LinkedList();
         for(int i = 0; i < length; i++) {
             linkedList.add(i);
         }
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             randomIndex = random.nextInt(length);
             startTime = System.currentTimeMillis();
             if(randomIndex < linkedList.size()) {
@@ -515,7 +494,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-            result = result / 100;
+            result = result / countTestStep;
         }
 
         return result;
@@ -524,14 +503,14 @@ public class HomeWorkEE1 {
 
     public long linkedListContainsTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
         int randomValue;
         List linkedList = new LinkedList();
         for(int i = 0; i < length; i++) {
             linkedList.add(i);
         }
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             randomValue = random.nextInt(length);
             Iterator iterator = linkedList.iterator();
 
@@ -551,7 +530,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-            result = result / 100;
+            result = result / countTestStep;
         }
 
         return result;
@@ -560,10 +539,10 @@ public class HomeWorkEE1 {
 
     public long linkedListPopulateTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
         List linkedList;
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             linkedList = new LinkedList();
             startTime = System.currentTimeMillis();
             for(int j = 0; j < length; j++) {
@@ -578,7 +557,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-           result = result / 100;
+           result = result / countTestStep;
         }
 
         return result;
@@ -586,11 +565,11 @@ public class HomeWorkEE1 {
 
     public long linkedListIteratorAddTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
         List linkedList;
         ListIterator iterator;
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             linkedList = new LinkedList();
 
             for(int j = 0; j < length; j++) {
@@ -611,7 +590,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-            result = result / 100;
+            result = result / countTestStep;
         }
 
         return result;
@@ -620,11 +599,11 @@ public class HomeWorkEE1 {
 
     public long linkedListIteratorRemoveTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
         List linkedList;
         Iterator iterator;
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             linkedList = new ArrayList();
             for(int j = 0; j < length; j++) {
                 linkedList.add(j);
@@ -649,7 +628,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-            result = result / 100;
+            result = result / countTestStep;
         }
 
         return result;
@@ -659,11 +638,11 @@ public class HomeWorkEE1 {
 
     public long hashSetAddTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
 
         Set hashSet = new HashSet();
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             randomIndex = random.nextInt(length-1);
 
             startTime = System.currentTimeMillis();
@@ -677,7 +656,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-           result = result / 100;
+           result = result / countTestStep;
         }
 
         return result;
@@ -685,7 +664,7 @@ public class HomeWorkEE1 {
 
     public long hashSetGetTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
         Iterator iterator;
         Set hashSet = new HashSet();
         for(int i = 0; i < length; i++) {
@@ -694,7 +673,7 @@ public class HomeWorkEE1 {
 
         iterator = hashSet.iterator();
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             randomIndex = random.nextInt(length);
 
             startTime = System.currentTimeMillis();
@@ -713,7 +692,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-           result = result / 100;
+           result = result / countTestStep;
         }
 
         return result;
@@ -722,9 +701,9 @@ public class HomeWorkEE1 {
 
     public long hashSetRemoveTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             Set hashSet = new HashSet();
             for(int j = 0; j < length; j++) {
                 hashSet.add(j);
@@ -742,7 +721,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-            result = result / 100;
+            result = result / countTestStep;
         }
 
         return result;
@@ -750,14 +729,14 @@ public class HomeWorkEE1 {
 
     public long hashSetContainsTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
         int randomValue;
         Set hashSet = new HashSet();
         for(int i = 0; i < length; i++) {
             hashSet.add(i);
         }
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             randomValue = random.nextInt(length);
             Iterator iterator = hashSet.iterator();
 
@@ -777,7 +756,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-            result = result / 100;
+            result = result / countTestStep;
         }
 
         return result;
@@ -785,10 +764,10 @@ public class HomeWorkEE1 {
 
     public long hashSetPopulateTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
         Set hashSet ;
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             hashSet = new HashSet();
             startTime = System.currentTimeMillis();
             for(int j = 0; j < length; j++) {
@@ -803,7 +782,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-           result = result / 100;
+           result = result / countTestStep;
         }
 
         return result;
@@ -813,15 +792,15 @@ public class HomeWorkEE1 {
 
     public long treeSetAddTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
 
-        Set treeSet = new TreeSet();
-
-        for(int i = 0;i < 100;i++) {
-            randomIndex = random.nextInt(length-1);
-
+        for(int i = 0;i < countTestStep;i++) {
+            Set treeSet = new TreeSet();
             startTime = System.currentTimeMillis();
-            treeSet.add(randomIndex);
+            for(int j = 0; j < length;j++) {
+                randomIndex = random.nextInt(length-1);
+                treeSet.add(randomIndex);
+            }
             endTime = System.currentTimeMillis();
             arrayTimes[i] = endTime - startTime;
         }
@@ -831,7 +810,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-            result = result / 100;
+            result = result / countTestStep;
         }
 
         return result;
@@ -840,7 +819,7 @@ public class HomeWorkEE1 {
 
     public long treeSetGetTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
         Iterator iterator;
         Set treeSet = new HashSet();
         for(int i = 0; i < length; i++) {
@@ -849,7 +828,7 @@ public class HomeWorkEE1 {
 
         iterator = treeSet.iterator();
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             randomIndex = random.nextInt(length);
 
             startTime = System.currentTimeMillis();
@@ -868,7 +847,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-           result = result / 100;
+           result = result / countTestStep;
         }
 
         return result;
@@ -876,9 +855,9 @@ public class HomeWorkEE1 {
 
     public long treeSetRemoveTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             Set treeSet = new TreeSet();
             for(int j = 0; j < length; j++) {
                 treeSet.add(j);
@@ -896,7 +875,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-           result = result / 100;
+           result = result / countTestStep;
         }
 
         return result;
@@ -904,14 +883,14 @@ public class HomeWorkEE1 {
 
     public long treeSetContainsTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
         int randomValue;
         Set treeSet = new TreeSet();
         for(int i = 0; i < length; i++) {
             treeSet.add(i);
         }
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             randomValue = random.nextInt(length);
             Iterator iterator = treeSet.iterator();
 
@@ -931,7 +910,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-           result = result / 100;
+           result = result / countTestStep;
         }
 
         return result;
@@ -939,10 +918,10 @@ public class HomeWorkEE1 {
 
     public long treeSetPopulateTime(int length) {
         long result = 0;
-        long[] arrayTimes = new long[100];
+        long[] arrayTimes = new long[countTestStep];
         Set treeSet ;
 
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < countTestStep;i++) {
             treeSet = new HashSet();
             startTime = System.currentTimeMillis();
             for(int j = 0; j < length; j++) {
@@ -957,7 +936,7 @@ public class HomeWorkEE1 {
         }
 
         if(result > 0) {
-            result = result / 100;
+            result = result / countTestStep;
         }
 
         return result;
