@@ -18,7 +18,7 @@ public class HomeWorkEE2 {
 
         try {
             exImpl.addTask(task1);
-        }catch (ExecuteWasException) {
+        }catch (ExecuteWasException e) {
             System.out.println("Exception");
         }
 
