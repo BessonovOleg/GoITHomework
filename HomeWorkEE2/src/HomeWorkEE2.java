@@ -1,7 +1,9 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeWorkEE2 {
 
+    private ExecutorImpl exImpl;
 
     public HomeWorkEE2() {
         TaskImplIntegerAdd task1 = new TaskImplIntegerAdd(10);
@@ -12,6 +14,13 @@ public class HomeWorkEE2 {
         TaskImpLongAdd task6 = new TaskImpLongAdd(100L);
         TaskImpLongAdd task7 = new TaskImpLongAdd(200L);
         TaskImpLongAdd task8 = new TaskImpLongAdd(300L);
+        exImpl = new ExecutorImpl();
+
+        try {
+            exImpl.addTask(task1);
+        }catch (ExecuteWasException) {
+            System.out.println("Exception");
+        }
 
 
     }
@@ -47,10 +56,10 @@ public class HomeWorkEE2 {
         void execute();
 
         // Получить валидные результаты. Бросает Эксепшн если не был вызван метод execute()
-        List getValidResults() throws ExecuteNotWasException;
+        List<T> getValidResults() throws ExecuteNotWasException;
 
         // Получить невалидные результаты. Бросает Эксепшн если не был вызван метод execute()
-        List getInvalidResults() throws ExecuteNotWasException;
+        List<T> getInvalidResults() throws ExecuteNotWasException;
 
     }
 
@@ -125,31 +134,46 @@ public class HomeWorkEE2 {
     public class ExecutorImpl implements Executor<Number> {
 
         private boolean isExecuteWas = false;
+        List<Task> listTasks = new ArrayList<Task>();
 
         @Override
-        public void addTask(Task<? extends Number> task) {
-
-        }
-
-        @Override
-        public void addTask(Task<? extends Number> task, Validator<? super Number> validator) {
-
-        }
-
-        @Override
-        public void execute() throws ExecuteWasException{
+        public void addTask(Task<? extends Number> task) throws ExecuteWasException{
             if (isExecuteWas) {
                 throw new ExecuteWasException();
             }
+
+            listTasks.add(task);
         }
 
         @Override
-        public List getValidResults() {
+        public void addTask(Task<? extends Number> task, Validator<? super Number> validator) throws ExecuteWasException{
+            if (isExecuteWas) {
+                throw new ExecuteWasException();
+            }
+
+            listTasks.add(task);
+        }
+
+        @Override
+        public void execute() {
+        }
+
+        @Override
+        public List getValidResults() throws ExecuteNotWasException{
+            if (isExecuteWas) {
+                throw new ExecuteNotWasException();
+            }
+
+
             return null;
         }
 
         @Override
-        public List getInvalidResults() {
+        public List getInvalidResults() throws ExecuteNotWasException{
+            if (isExecuteWas) {
+                throw new ExecuteNotWasException();
+            }
+
             return null;
         }
     }
@@ -157,6 +181,7 @@ public class HomeWorkEE2 {
 
 
     public static void main(String[] args) {
+        HomeWorkEE2 hh = new HomeWorkEE2();
 
     }
 
