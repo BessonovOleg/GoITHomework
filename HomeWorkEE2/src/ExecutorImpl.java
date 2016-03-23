@@ -35,31 +35,27 @@ public class ExecutorImpl implements Executor<Number> {
             for (Task task : listTasks) {
                 task.execute();
                 if (validator.isValid(task.getResult())) {
-                    listInvalidResult.add((Number)task.getResult());
+                    listValidResult.add((Number)task.getResult());
                 }else{
                     listInvalidResult.add((Number)task.getResult());
                 }
             }
         }
-
-
     }
 
     @Override
-    public List getValidResults() throws ExecuteNotWasException{
+    public List<Number> getValidResults() throws ExecuteNotWasException{
         if (!isExecuteWas) {
             throw new ExecuteNotWasException();
         }
-
         return listValidResult;
     }
 
     @Override
-    public List getInvalidResults() throws ExecuteNotWasException{
+    public List<Number> getInvalidResults() throws ExecuteNotWasException{
         if (!isExecuteWas) {
             throw new ExecuteNotWasException();
         }
-
         return listInvalidResult;
     }
 }

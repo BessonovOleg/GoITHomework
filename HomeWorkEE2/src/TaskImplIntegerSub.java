@@ -7,7 +7,7 @@ public class TaskImplIntegerSub implements Task<Number> {
 
     @Override
     public void execute() {
-        num -= num;
+        num = num - 10;
     }
 
     @Override

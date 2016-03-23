@@ -7,7 +7,7 @@ public class TaskImplIntegerAdd implements Task<Number> {
 
     @Override
     public void execute() {
-        num += num;
+        num = num + num;
     }
 
     @Override

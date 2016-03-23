@@ -6,8 +6,8 @@ public class HomeWorkEE2 {
     private ExecutorImpl exImpl;
 
     public HomeWorkEE2() {
-        TaskImplIntegerAdd task1 = new TaskImplIntegerAdd(10);
-        TaskImplIntegerAdd task2 = new TaskImplIntegerAdd(20);
+        TaskImplIntegerAdd task1 = new TaskImplIntegerAdd(1);
+        TaskImplIntegerAdd task2 = new TaskImplIntegerAdd(2);
         TaskImplIntegerAdd task3 = new TaskImplIntegerAdd(30);
         TaskImplIntegerSub task4 = new TaskImplIntegerSub(50);
         TaskImplIntegerSub task5 = new TaskImplIntegerSub(60);
@@ -24,27 +24,32 @@ public class HomeWorkEE2 {
             exImpl.addTask(task5);
             exImpl.addTask(task6);
             exImpl.addTask(task7);
-        }catch (ExecuteWasException e) {
-            System.out.println("Exception");
-        }
-
-
-        try {
             exImpl.addTask(task8, new ValidatorNum());
-        } catch (ExecuteWasException e) {
-            System.out.println("Exception!");
+        }catch (ExecuteWasException e) {
+            e.printStackTrace();
         }
-
-
 
         exImpl.execute();
 
+        try{
+            for(Number num:exImpl.getValidResults()) {
+                System.out.println("Valid: " + num);
+            }
+        } catch (ExecuteNotWasException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            for(Number num:exImpl.getInvalidResults()) {
+                System.out.println("Invalid: " + num);
+            }
+        }catch (ExecuteNotWasException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
         HomeWorkEE2 hh = new HomeWorkEE2();
     }
-
-
 
 }
