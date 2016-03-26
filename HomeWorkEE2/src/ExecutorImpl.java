@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ExecutorImpl implements Executor<Number> {
 
@@ -7,7 +9,8 @@ public class ExecutorImpl implements Executor<Number> {
     List<Task> listTasks = new ArrayList<Task>();
     List<Number> listValidResult = new ArrayList<Number>();
     List<Number> listInvalidResult = new ArrayList<Number>();
-    Validator validator;
+    Map<Task,Validator> taskValidatorMap = new HashMap<Task, Validator>();
+
 
     @Override
     public void addTask(Task<? extends Number> task) throws ExecuteWasException{
@@ -24,23 +27,24 @@ public class ExecutorImpl implements Executor<Number> {
         }
 
         listTasks.add(task);
-        this.validator = validator;
+        taskValidatorMap.put(task,validator);
     }
 
     @Override
     public void execute() {
         isExecuteWas = true;
-
-        if (validator!=null) {
             for (Task task : listTasks) {
+                Validator<Number> validator = taskValidatorMap.get(task);
                 task.execute();
-                if (validator.isValid(task.getResult())) {
-                    listValidResult.add((Number)task.getResult());
-                }else{
-                    listInvalidResult.add((Number)task.getResult());
+
+                if(validator != null) {
+                    if (validator.isValid((Number) task.getResult())) {
+                        listValidResult.add((Number) task.getResult());
+                    } else {
+                        listInvalidResult.add((Number) task.getResult());
+                    }
                 }
             }
-        }
     }
 
     @Override
