@@ -19,9 +19,9 @@ public class HomeWorkEE2 {
         try {
             exImpl.addTask(task1);
             exImpl.addTask(task2);
-            exImpl.addTask(task3);
+            exImpl.addTask(task3, new ValidatorNum());
             exImpl.addTask(task4);
-            exImpl.addTask(task5);
+            exImpl.addTask(task5, new ValidatorNum());
             exImpl.addTask(task6);
             exImpl.addTask(task7);
             exImpl.addTask(task8, new ValidatorNum());

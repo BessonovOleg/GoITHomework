@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ExecutorImpl implements Executor<Number> {
+public class executorimpl implements Executor<Number> {
 
     private boolean isExecuteWas = false;
     List<Task> listTasks = new ArrayList<Task>();
