@@ -32,8 +32,10 @@ public class Adjuster implements Semaphore {
 
     @Override
     public void acquire(int permits) {
-        for(int i = 0;i < permits; i++) {
-            acquire();
+        synchronized (lock) {
+            for (int i = 0; i < permits; i++) {
+                acquire();
+            }
         }
     }
 
@@ -44,8 +46,6 @@ public class Adjuster implements Semaphore {
             if (availablePermits < countPermits) {
                 availablePermits++;
                 lock.notify();
-            } else {
-                lock.notifyAll();
             }
         }
     }
@@ -53,8 +53,10 @@ public class Adjuster implements Semaphore {
     // Отпускает переданое количество разрешений возварщая их семафору.
     @Override
     public void release(int permits) {
-        for(int i = 0;i < permits; i++) {
-            release();
+        synchronized (lock) {
+            for (int i = 0; i < permits; i++) {
+                release();
+            }
         }
     }
 

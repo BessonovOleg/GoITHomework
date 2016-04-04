@@ -9,11 +9,14 @@ public class HomeWorkEE31 {
 
 
     public void test() {
+
+
         adjuster = new Adjuster(10);
+
 
         for(int i = 0; i < 100; i++) {
             new Thread(new Worker()).start();
-        }
+       }
     }
 
     public class Worker implements Runnable {
