@@ -1,8 +1,8 @@
 
 public class Adjuster implements Semaphore {
-    private static int countPermits;
-    private static int availablePermits;
-    private Object lock = new Object();
+    private int countPermits;
+    private int availablePermits;
+    private final Object lock = new Object();
 
     public Adjuster(int permits) {
         countPermits = permits;
