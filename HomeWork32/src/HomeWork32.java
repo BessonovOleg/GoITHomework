@@ -1,7 +1,6 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Phaser;
 
@@ -21,21 +20,22 @@ public class HomeWork32 implements SquareSum{
         long result = 0;
         List<int[]> list = new ArrayList<>();
         list = separationArray(values,numberOfThreads);
-
-        List<Long> listResult = new ArrayList<>();
         Phaser phaser = new Phaser(numberOfThreads + 1);
-        Executor executor = Executors.newFixedThreadPool(numberOfThreads);
+        ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
+        List<CalculatorSquareInArray> listTask = new ArrayList<>();
+
         for(int i = 0;i < numberOfThreads; i++) {
-            executor.execute(new CalculatorSquareInArray(listResult,phaser,list.get(i)));
+            listTask.add(new CalculatorSquareInArray(phaser,list.get(i)));
+            executor.execute(listTask.get(i));
         }
 
         int phase = phaser.getPhase();
         phaser.arriveAndAwaitAdvance();
+        executor.shutdown();
 
-        for(long l:listResult) {
-            result = result + l;
+        for(CalculatorSquareInArray Cs:listTask) {
+            result = result + Cs.getTmpRes();
         }
-
 
         return result;
 
@@ -44,24 +44,19 @@ public class HomeWork32 implements SquareSum{
 
     public class CalculatorSquareInArray implements Runnable {
 
-        private List<Long> res;
         private int[] ar;
         private long tmpRes = 0;
         private Phaser p;
 
-        public CalculatorSquareInArray(List<Long> res,Phaser p,int[] ar) {
-            this.res = res;
+        public CalculatorSquareInArray(Phaser p,int[] ar) {
             this.ar = ar;
             this.p = p;
         }
-
         @Override
         public void run() {
             for(long l:ar) {
                 tmpRes = tmpRes + (l*l);
             }
-           // res.add(tmpRes);
-            //System.out.println(Thread.currentThread().getName() + " finished. Result = " + tmpRes);
             p.arriveAndAwaitAdvance();
         }
 
