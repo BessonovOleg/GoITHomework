@@ -18,7 +18,7 @@ public class Adjuster implements Semaphore {
                     break;
                 } else {
                     try {
-                        this.wait();
+                        wait();
                     }catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -38,7 +38,7 @@ public class Adjuster implements Semaphore {
     public synchronized void release() {
             if (maxPermits < countPermits) {
                 maxPermits++;
-                this.notify();
+                notify();
             }
     }
 

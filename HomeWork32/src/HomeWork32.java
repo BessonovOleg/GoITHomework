@@ -15,7 +15,6 @@ public class HomeWork32 implements SquareSum{
         System.out.println(hw.getSquareSum(ar,4));
     }
 
-
     @Override
     public long getSquareSum(int[] values, int numberOfThreads) {
         long result = 0;
@@ -23,20 +22,24 @@ public class HomeWork32 implements SquareSum{
         list = separationArray(values,numberOfThreads);
 
         List<Long> listResult = new ArrayList<>();
-        Phaser phaser = new Phaser();
+        Phaser phaser = new Phaser(1);
         Executor executor = Executors.newFixedThreadPool(numberOfThreads);
         for(int i = 0;i < numberOfThreads; i++) {
             executor.execute(new CalculatorSquareInArray(listResult,phaser,list.get(i)));
         }
 
+        int phase = phaser.getPhase();
         phaser.arriveAndAwaitAdvance();
-
-        for(long l:listResult) {
-            result += l;
-        }
+        //System.out.println("Фаза " + phase + " завершена");
         phaser.arriveAndDeregister();
 
+        for(long l:listResult) {
+            result = result + l;
+        }
+
+
         return result;
+
     }
 
 
@@ -57,9 +60,10 @@ public class HomeWork32 implements SquareSum{
         @Override
         public void run() {
             for(long l:ar) {
-                tmpRes += l*l;
+                tmpRes = tmpRes + (l*l);
             }
             res.add(tmpRes);
+            //System.out.println(Thread.currentThread().getName() + " finished. Result = " + tmpRes);
             p.arriveAndDeregister();
         }
     }
