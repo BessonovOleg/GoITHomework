@@ -8,6 +8,7 @@ import java.util.concurrent.Phaser;
 public class HomeWork32 implements SquareSum{
 
 
+
     public static void main(String[] args) {
         HomeWork32 hw = new HomeWork32();
         List<int[]> list = new ArrayList<>();
@@ -22,7 +23,7 @@ public class HomeWork32 implements SquareSum{
         list = separationArray(values,numberOfThreads);
 
         List<Long> listResult = new ArrayList<>();
-        Phaser phaser = new Phaser(1);
+        Phaser phaser = new Phaser(numberOfThreads + 1);
         Executor executor = Executors.newFixedThreadPool(numberOfThreads);
         for(int i = 0;i < numberOfThreads; i++) {
             executor.execute(new CalculatorSquareInArray(listResult,phaser,list.get(i)));
@@ -30,8 +31,6 @@ public class HomeWork32 implements SquareSum{
 
         int phase = phaser.getPhase();
         phaser.arriveAndAwaitAdvance();
-        //System.out.println("Фаза " + phase + " завершена");
-        phaser.arriveAndDeregister();
 
         for(long l:listResult) {
             result = result + l;
@@ -46,15 +45,14 @@ public class HomeWork32 implements SquareSum{
     public class CalculatorSquareInArray implements Runnable {
 
         private List<Long> res;
-        private Phaser p;
         private int[] ar;
         private long tmpRes = 0;
+        private Phaser p;
 
-        public CalculatorSquareInArray(List<Long> res,Phaser p, int[] ar) {
+        public CalculatorSquareInArray(List<Long> res,Phaser p,int[] ar) {
             this.res = res;
-            this.p = p;
             this.ar = ar;
-            p.register();
+            this.p = p;
         }
 
         @Override
@@ -62,9 +60,13 @@ public class HomeWork32 implements SquareSum{
             for(long l:ar) {
                 tmpRes = tmpRes + (l*l);
             }
-            res.add(tmpRes);
+           // res.add(tmpRes);
             //System.out.println(Thread.currentThread().getName() + " finished. Result = " + tmpRes);
-            p.arriveAndDeregister();
+            p.arriveAndAwaitAdvance();
+        }
+
+        public long getTmpRes() {
+            return tmpRes;
         }
     }
 
