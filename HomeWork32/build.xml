@@ -1,0 +1,30 @@
+<project name = "HomeWork32" basedir = ".">
+
+    <property name = "src" location="src/main"/>
+    <property name = "build" location="build"/>
+    <property name = "dist" location="dist"/>
+
+    <target name = "init">
+        <mkdir dir = "${build}"/>
+        <mkdir dir = "${dist}"/>
+    </target>
+
+    <target name = "compile" depends="init">
+        <javac srcdir="${src}" destdir="${build}" source="1.7" target="1.7"/>
+    </target>
+
+    <target name="dist" depends="compile">
+        <jar destfile="HomeWork32.jar">
+            <fileset dir="${build}"/>
+            <manifest>
+                <attribute name="Main-Class" value="HomeWork32"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name = "clean">
+        <delete dir="${build}"/>
+        <delete dir="${dist}"/>
+    </target>
+
+</project>
