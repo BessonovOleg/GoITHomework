@@ -18,11 +18,9 @@ public class MainCalculator {
         mainCalculator.execute();
     }
 
-
-    public MainCalculator(Calculator calculator) {
+    public void setCalculator(Calculator calculator) {
         this.calculator = calculator;
     }
-
     public void execute() {
         typeExpression = 1;
         Scanner input = new Scanner(System.in);
@@ -51,28 +49,35 @@ public class MainCalculator {
                     checkAndSetType(strInput);
                 }
             } else {
-                if(typeExpression == 1) {
-                    System.out.println(calculator.getIntegerResult(strInput));
-                }
-
-                if(typeExpression == 2) {
-                    System.out.println(calculator.getLongResult(strInput));
-                }
-
-                if(typeExpression == 3) {
-                    System.out.println(calculator.getFloatResult(strInput));
-                }
-
-                if(typeExpression == 4) {
-                    System.out.println(calculator.getDoubleResult(strInput));
-                }
-
-                if(typeExpression == 5) {
-                    System.out.println(calculator.getUserTypeResult(strInput));
-                }
+                System.out.println(calculate(strInput));
             }
 
         }
+    }
+
+
+    public String calculate(String input) {
+        String result = "wrong input";
+        if(typeExpression == 1) {
+          result = calculator.getIntegerResult(input);
+        }
+
+        if(typeExpression == 2) {
+          result = calculator.getLongResult(input);
+        }
+
+        if(typeExpression == 3) {
+           result = calculator.getFloatResult(input);
+        }
+
+        if(typeExpression == 4) {
+           result = calculator.getDoubleResult(input);
+        }
+
+        if(typeExpression == 5) {
+            result = calculator.getUserTypeResult(input);
+        }
+        return result;
     }
 
 

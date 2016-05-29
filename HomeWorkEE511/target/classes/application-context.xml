@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
         <bean id="maincalculator" class="ua.goit.homework511.MainCalculator">
-                <constructor-arg index="0" ref="calculator"/>
+                <property name="calculator" ref="calculator"/>
         </bean>
 
         <bean id="registerLongMultiply" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
