@@ -7,12 +7,42 @@
                 <constructor-arg index="0" ref="calculator"/>
         </bean>
 
-        <bean id="calculator" class="ua.goit.homework51.Calculator">
-                <property name="addOperation" ref="longMultiply"/>
-                <property name="addOperation" ref="integerMultiply"/>
+        <bean id="registerLongMultiply" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+                <property name="targetObject" ref="calculator"/>
+                <property name="targetMethod" value="addOperation"/>
+                <property name="arguments" ref="longMultiply"/>
         </bean>
+
+        <bean id="registerIntegerMultiply" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+                <property name="targetObject" ref="calculator"/>
+                <property name="targetMethod" value="addOperation"/>
+                <property name="arguments" ref="integerMultiply"/>
+        </bean>
+
+        <bean id="registerFloatMultiply" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+                <property name="targetObject" ref="calculator"/>
+                <property name="targetMethod" value="addOperation"/>
+                <property name="arguments" ref="floatMultiply"/>
+        </bean>
+
+        <bean id="registerDoubleMultiply" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+                <property name="targetObject" ref="calculator"/>
+                <property name="targetMethod" value="addOperation"/>
+                <property name="arguments" ref="doubleMultiply"/>
+        </bean>
+
+        <bean id="registerUserAdd" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+                <property name="targetObject" ref="calculator"/>
+                <property name="targetMethod" value="addOperation"/>
+                <property name="arguments" ref="useradd"/>
+        </bean>
+
+        <bean id="calculator" class="ua.goit.homework51.Calculator"/>
 
         <bean id="integerMultiply" class="ua.goit.homework511.OpIntegerMultiply"/>
         <bean id="longMultiply" class="ua.goit.homework511.OpLongMultiply"/>
+        <bean id="floatMultiply" class="ua.goit.homework511.OpFloatMultiply"/>
+        <bean id="doubleMultiply" class="ua.goit.homework511.OpDoubleMultiply"/>
+        <bean id="useradd" class="ua.goit.homework511.OpUserAdd"/>
 
 </beans>

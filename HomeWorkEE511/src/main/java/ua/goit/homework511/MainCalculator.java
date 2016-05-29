@@ -2,9 +2,8 @@ package ua.goit.homework511;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ua.goit.homework51.AbstractOperation;
 import ua.goit.homework51.Calculator;
-import ua.goit.homework51.IOperation;
+
 
 import java.util.Scanner;
 
@@ -16,8 +15,6 @@ public class MainCalculator {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
         MainCalculator mainCalculator = applicationContext.getBean("maincalculator",MainCalculator.class);
-
-        mainCalculator.addOtherCalcFunction();
         mainCalculator.execute();
     }
 
@@ -99,27 +96,4 @@ public class MainCalculator {
             System.out.println("Wrong input!");
         }
     }
-
-
-    public void addOtherCalcFunction() {
-
-
-
-        IOperation opMultiplyFloat = new IOperation() {
-            public String calc(Object var1, Object var2) {
-                return String.valueOf(Float.valueOf(var1.toString()) * Float.valueOf(var2.toString()));
-            }
-        };
-        calculator.addOperation(Calculator.ADD_LONG,"*",opMultiplyFloat);
-
-        IOperation opMultiplyDouble = new IOperation() {
-            public String calc(Object var1, Object var2) {
-                return String.valueOf(Double.valueOf(var1.toString()) * Double.valueOf(var2.toString()));
-            }
-        };
-        calculator.addOperation(Calculator.ADD_LONG,"*",opMultiplyDouble);
-
-    }
-
-
 }
