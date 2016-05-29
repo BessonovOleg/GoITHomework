@@ -2,6 +2,7 @@ package ua.goit.homework511;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ua.goit.homework51.AbstractOperation;
 import ua.goit.homework51.Calculator;
 import ua.goit.homework51.IOperation;
 
@@ -101,19 +102,8 @@ public class MainCalculator {
 
 
     public void addOtherCalcFunction() {
-        IOperation opMultiplyInt = new IOperation() {
-            public String calc(Object var1, Object var2) {
-                return String.valueOf(Integer.valueOf(var1.toString()) * Integer.valueOf(var2.toString()));
-            }
-        };
-        calculator.addOperation(Calculator.ADD_INTEGER,"*",opMultiplyInt);
 
-        IOperation opMultiplyLong = new IOperation() {
-            public String calc(Object var1, Object var2) {
-                return String.valueOf(Long.valueOf(var1.toString()) * Long.valueOf(var2.toString()));
-            }
-        };
-        calculator.addOperation(Calculator.ADD_LONG,"*",opMultiplyLong);
+
 
         IOperation opMultiplyFloat = new IOperation() {
             public String calc(Object var1, Object var2) {
@@ -130,5 +120,6 @@ public class MainCalculator {
         calculator.addOperation(Calculator.ADD_LONG,"*",opMultiplyDouble);
 
     }
+
 
 }

@@ -160,40 +160,37 @@ public class Calculator {
     }
 
 
-    public boolean addOperation(Integer typeOperation,String strOperation,IOperation classOperation){
-        boolean isOperationAdd = false;
+    public void addOperation(AbstractOperation aop) {
+        addOperation(aop.typeOperation,aop.strOperation,aop);
+    }
+
+    public void addOperation(Integer typeOperation,String strOperation,IOperation classOperation){
 
         if (typeOperation == ADD_INTEGER) {
             if (!mapIntegerOperations.containsKey(strOperation) && classOperation != null) {
                 mapIntegerOperations.put(strOperation,classOperation);
-                isOperationAdd = true;
             }
         }
         if (typeOperation == ADD_LONG) {
             if (!mapLongOperations.containsKey(strOperation) && classOperation != null) {
                 mapLongOperations.put(strOperation,classOperation);
-                isOperationAdd = true;
             }
         }
         if (typeOperation == ADD_FLOAT) {
             if (!mapFloatOperations.containsKey(strOperation) && classOperation != null) {
                 mapFloatOperations.put(strOperation,classOperation);
-                isOperationAdd = true;
             }
         }
         if (typeOperation == ADD_DOUBLE) {
             if (!mapDoubleOperations.containsKey(strOperation) && classOperation != null) {
                 mapDoubleOperations.put(strOperation,classOperation);
-                isOperationAdd = true;
             }
         }
         if (typeOperation == ADD_USER_TYPE) {
             if (!mapUserTypeOperations.containsKey(strOperation) && classOperation != null) {
                 mapUserTypeOperations.put(strOperation,classOperation);
-                isOperationAdd = true;
             }
         }
-        return isOperationAdd;
     }
 
     private class OpIntegerAdd implements IOperation{

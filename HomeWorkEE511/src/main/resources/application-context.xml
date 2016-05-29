@@ -7,5 +7,12 @@
                 <constructor-arg index="0" ref="calculator"/>
         </bean>
 
-        <bean id="calculator" class="ua.goit.homework51.Calculator"/>
+        <bean id="calculator" class="ua.goit.homework51.Calculator">
+                <property name="addOperation" ref="longMultiply"/>
+                <property name="addOperation" ref="integerMultiply"/>
+        </bean>
+
+        <bean id="integerMultiply" class="ua.goit.homework511.OpIntegerMultiply"/>
+        <bean id="longMultiply" class="ua.goit.homework511.OpLongMultiply"/>
+
 </beans>
