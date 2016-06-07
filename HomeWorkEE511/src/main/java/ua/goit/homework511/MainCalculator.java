@@ -13,7 +13,7 @@ public class MainCalculator {
     private Calculator calculator;
 
     public static void main(String[] args) {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml","aop-context.xml");
         MainCalculator mainCalculator = applicationContext.getBean("maincalculator",MainCalculator.class);
         mainCalculator.execute();
     }
